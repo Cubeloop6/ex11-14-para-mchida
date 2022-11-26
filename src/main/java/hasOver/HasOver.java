@@ -38,11 +38,12 @@ public class HasOver {
         @Override
         protected Boolean compute() {
             if(hi - lo <= CUTOFF) {
-                if(Max(arr, lo, hi) > val) {
-                    return true;
-                } else {
-                    return false;
+                for(int i = lo; i < hi; i++) {
+                    if(arr[i] > val) {
+                        return true;
+                    }
                 }
+                return false;
             }
             int mid = lo + (hi - lo)/2;
             HasOverTask left = new HasOverTask(val, arr, lo, mid);
@@ -57,15 +58,7 @@ public class HasOver {
         }
 
     }
-    private static int Max(int[]arr, int lo, int hi) {
-        int maxVal = arr[lo];
-        for(int i = lo + 1; i < hi; i++) {
-            if(arr[i] > maxVal) {
-                maxVal = arr[i];
-            }
-        }
-        return maxVal;
-    }
+
     private static void usage() {
         System.err.println("USAGE: HasOver <number> <array> <sequential cutoff>");
         System.exit(2);
